@@ -4,6 +4,10 @@ A web-based utility designed to quickly generate Windows batch (`.bat`) scripts 
 
 This tool helps developers streamline the process of initializing projects, installing dependencies, and configuring tools across various package managers.
 
+## Link
+
+[App link](https://vercel.com/frkhor-8728s-projects/project-setup-tool)
+
 ## Features
 
 - **Multi-Package Manager Support**: Seamlessly generate commands for:
