@@ -27,8 +27,12 @@ export default function App(){
         const blob = new Blob([command],{type:"text/plain;charset=utf-8"})
         const url = URL.createObjectURL(blob)
         const link = document.createElement("a")
+        let downloadName = fileName
+        if(downloadName.slice(downloadName.length - 4) !== '.bat'){
+            downloadName += '.bat'
+        }
         link.href = url
-        link.download = fileName
+        link.download = downloadName
         document.body.appendChild(link)
         link.click()
         document.body.removeChild(link)
@@ -43,7 +47,7 @@ export default function App(){
             <div className='flex flex-col gap-6'>
                 <div className="flex flex-col gap-2">
                     <label className="font-medium text-gray-700">File name:</label>
-                    <input type='text' value={fileName} onChange={(e)=>setFileName(e.target.value)} className='border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 outline-none' />
+                    <input type='text' value={fileName} onChange={(e)=>{setFileName(e.target.value)}} className='border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 outline-none' />
                 </div>
                 <div className="flex flex-col gap-2">
                     <label className="font-medium text-gray-700">Downloader:</label>
