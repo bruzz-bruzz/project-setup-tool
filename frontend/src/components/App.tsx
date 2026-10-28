@@ -63,7 +63,7 @@ export default function App(){
                 {Object.keys(packages).map((val,idx)=>(
                     <div key={idx} className="flex flex-col gap-2">
                         <div className="flex justify-between items-center bg-gray-50 p-4 rounded-md border border-gray-200">
-                            <p className="font-medium">{val}, {packages[val] === '' ? 'Latest Version' : "Version " + packages[val]}</p>
+                            <p className="font-medium">{val} ({packages[val] === '' ? 'Latest Version' : "Version " + packages[val]})</p>
                             <div className="flex gap-2">
                                 <button className='bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600' onClick={()=>{
                                     setShowEdit(true)
@@ -87,6 +87,13 @@ export default function App(){
                         </div>
                         {showEdit && currEdit === val && (
                             <div className="space-y-2 p-4 border border-blue-200 rounded-md bg-blue-50">
+                                <input type='text' value={editedPackageNewName} onChange={(e)=>{
+                                    setEditedPackageNewName(e.target.value)
+                                }} className="w-full border border-gray-300 rounded-md p-2" placeholder="New Package Name" />
+                                <input type='text' value={packages[val]} onChange={(e)=>{
+                                    const newVal = e.target.value
+                                    setPackages(p => ({...p, [val]: newVal}))
+                                }} className="w-full border border-gray-300 rounded-md p-2" placeholder="New Version" />
                                 <button className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600" onClick={()=>{
                                     setCurrEdit("")
                                     setShowEdit(false)
@@ -101,17 +108,10 @@ export default function App(){
                                         }
                                         return newPackages
                                     })
-                                    setToast({msg:"Package edited",ok:true})
+                                    setToast({msg:`Package ${val} edited`,ok:true})
                                     resetToast()
                                     setEditedPackageNewName("")
                                 }}>Done</button>
-                                <input type='text' value={editedPackageNewName} onChange={(e)=>{
-                                    setEditedPackageNewName(e.target.value)
-                                }} className="w-full border border-gray-300 rounded-md p-2" placeholder="New Package Name" />
-                                <input type='text' value={packages[val]} onChange={(e)=>{
-                                    const newVal = e.target.value
-                                    setPackages(p => ({...p, [val]: newVal}))
-                                }} className="w-full border border-gray-300 rounded-md p-2" placeholder="New Version" />
                             </div>
                         )}
                     </div>
@@ -143,7 +143,7 @@ export default function App(){
                                     newPackages[newPackage.name] = newPackage.version
                                     return newPackages
                                 })
-                                setToast({msg:"Successfully added",ok:true})
+                                setToast({msg:`Successfully added ${newPackage.name} (${newPackage.version === '' ? 'Latest Version' : "Version " + newPackage.version})`,ok:true})
                             }else {
                                 setToast({msg:"The package must have a name",ok:false})
                             }
