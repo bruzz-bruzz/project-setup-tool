@@ -6,7 +6,7 @@ This tool helps developers streamline the process of initializing projects, inst
 
 ## Link
 
-[App link](https://vercel.com/frkhor-8728s-projects/project-setup-tool)
+[App link](https://project-setup-tool.vercel.app/)
 
 ## Features
 
